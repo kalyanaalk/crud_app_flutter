@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'data.dart';
 import 'card.dart';
 import 'modal.dart';
+import 'objectbox.dart';
 
 defaultData() => Data(height: 165, weight: 60);
+late ObjectBox objectBox;
 
-void main() => runApp(MaterialApp(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  objectBox = await ObjectBox.create();
+  runApp(MaterialApp(
       home: DataList(),
     ));
+}
 
 class DataList extends StatefulWidget {
   @override
@@ -15,32 +21,37 @@ class DataList extends StatefulWidget {
 }
 
 class _DataListState extends State<DataList> {
-  List<Data> datas = [
-    Data(height: 170, weight: 65),
-    Data(height: 180, weight: 75),
-    Data(height: 160, weight: 55),
-  ];
+  List<Data> datas = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() {
+    setState(() {
+      datas = objectBox.dataBox.getAll();
+    });
+  }
 
   void deletedData(Data data) {
-    setState(() {
-      datas.remove(data);
-    });
+    objectBox.dataBox.remove(data.id);
+    loadData();
   }
 
   void showAddDataModal() {
     showModal(context, onSave: (newData) {
-      setState(() {
-        datas.add(newData);
-      });
+      objectBox.dataBox.put(newData);
+      loadData();
     });
   }
 
   void showEditDataModal(Data data) {
     showModal(context, data: data, onSave: (updatedData) {
-      setState(() {
-        data.height = updatedData.height;
-        data.weight = updatedData.weight;
-      });
+      updatedData.id = data.id;
+      objectBox.dataBox.put(updatedData);
+      loadData();
     });
   }
 
