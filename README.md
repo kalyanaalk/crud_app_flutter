@@ -4,7 +4,7 @@
 | --- | --- | --- |
 | Kalyana Putri Al Kanza | 5025211137 | PPB C |
 
-1. Add ObjectBox to project
+### 1. Add ObjectBox to project
 
 Use command below to add ObjectBox to the project.
 
@@ -25,7 +25,7 @@ dev_dependencies:
   objectbox_generator: any
 ```
 
-2. Define entity class (`data.dart`)
+### 2. Define entity class (`data.dart`)
 
 Edit data.dart so that it defines the data model with an ID and import ObjectBox package.
 
@@ -43,7 +43,7 @@ class Data {
 }
 ```
 
-3. Generate ObjectBox code (`objectbox.g.dart`, `objectbox-model.json`)
+### 3. Generate ObjectBox code (`objectbox.g.dart`, `objectbox-model.json`)
 
 This has to be done after defining entity class. Use command below to generate objectbox code.
 
@@ -53,7 +53,7 @@ dart run build_runner build
 
 It will look for all @Entity annotation in `lib` folder and generate `lib/objectbox-model.json` (a single database definition) and `lib/objectbox.g.dart`.
 
-4. Create a Store (`objectbox.dart`)
+### 4. Create a Store (`objectbox.dart`)
 
 Store is the entry point for using ObjectBox. It is the direct interface to the database and manages Boxes. Create a helper class in `objectbox.dart`.
 
@@ -83,7 +83,7 @@ class ObjectBox {
 }
 ```
 
-5. Initialize ObjectBox (`main.dart`)
+### 5. Initialize ObjectBox (`main.dart`)
 
 Edit main function in `main.dart` so that it initialize ObjectBox when app starts.
 
@@ -99,7 +99,7 @@ Future<void> main() async {
 }
 ```
 
-6. Load Data
+### 6. Load Data
 
 Load data is using getAll() to fetch all stored data in ObjectBox. It also updates the UI.
 
@@ -111,7 +111,7 @@ Load data is using getAll() to fetch all stored data in ObjectBox. It also updat
   }
 ```
 
-7. Add Data
+### 7. Add Data
 
 Add data is using put() to save newData to ObjectBox.
 
@@ -124,7 +124,7 @@ Add data is using put() to save newData to ObjectBox.
   }
 ```
 
-8. Update Data
+### 8. Update Data
 
 Update data is also using put(), but it is keeping the same ID as before.
 
@@ -138,7 +138,7 @@ Update data is also using put(), but it is keeping the same ID as before.
   }
 ```
 
-9. Delete Data
+### 9. Delete Data
 
 Delete data is using remove() based on data's ID.
 
