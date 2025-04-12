@@ -1,6 +1,6 @@
 {
-    "name": "crud_app_flutter",
-    "short_name": "crud_app_flutter",
+    "name": "flutter_objectbox",
+    "short_name": "flutter_objectbox",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
